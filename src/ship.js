@@ -1,11 +1,11 @@
-const Ship = (arr) => {
+const Ship = (length) => {
   // assign object property
-  const length = arr.length;
+  const shipLength = length;
 
-  let status = {};
-  arr.forEach(position => {
-    status[position] = { "hit": false}
-  });
+  let status = [];
+  for (let i=0; i < length; i++) {
+    status.push({"hit": false});
+  }
 
   // change object property
   const hit = (position) => {
@@ -13,11 +13,11 @@ const Ship = (arr) => {
   };
 
   // access object information
-  const getLength = () => length;
+  const getLength = () => shipLength;
   const getStatus = () => status;
   const isSunk = () => {
-    for (const[_, status] of Object.entries(status)) {
-      if (!status.hit) return false
+    for (let i=0; i < length; i++) {
+      if (!status[i].hit) return false
     }
     return true
   };
