@@ -33,3 +33,7 @@
 .grid-element:hover {
   background-color: yellow;
 }
+
+.occupied {
+  background-color: yellow;
+}
