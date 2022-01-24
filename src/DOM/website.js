@@ -14,8 +14,8 @@ const createHeader = () => {
 const createMain = () => {
   const main = document.createElement("div");
   main.classList.add("main");
-  main.appendChild(createGameBoardCard("Yours", 10));
-  main.appendChild(createGameBoardCard("Computer",10));
+  main.appendChild(createGameBoardCard("user", 10));
+  main.appendChild(createGameBoardCard("computer",10));
 
   return main;
 }
@@ -25,7 +25,7 @@ const createGameBoardCard = (name, size) => {
   gameBoardCard.classList.add("game-board-card");
   const userName = document.createElement("div");
   userName.classList.add("user-name");
-  userName.innerText = name;
+  userName.dataset.owner = name;
   const grid = document.createElement("div");
   grid.classList.add("grid");
   grid.classList.add(name);
@@ -38,6 +38,8 @@ const createGameBoardCard = (name, size) => {
   for (let i = 0; i < size * size; i++) {
     const gridElement = document.createElement('div');
     gridElement.classList.add('grid-element');
+    gridElement.dataset.index = i;
+    gridElement.dataset.owner = name;
     grid.appendChild(gridElement);
   }
 
