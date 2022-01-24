@@ -1,8 +1,4 @@
 import './style.css';
+import initializeWebsite from './DOM/website';
 
-const content = document.getElementById("content");
-
-const title = document.createElement("h1");
-title.innerText = "Let's Play Battleship";
-
-content.appendChild(title);
+initializeWebsite();
