@@ -62,4 +62,15 @@ describe("gameBoard", () => {
     expect(gameBoard.getAllSunk()).toBe(true);
 
   });
+  test("Gameboards should be able to show all the cells occupied with ships.", () => {
+    const gameBoard = GameBoard(10,10);
+    // places two ships
+    const shipOne = Ship(2);
+    const placeOne = [0, 1];
+    const shipTwo = Ship(3);
+    const placeTwo = [2, 3, 4];
+    gameBoard.placeShip(shipOne, placeOne);
+    gameBoard.placeShip(shipTwo, placeTwo);
+    expect(gameBoard.getOccupiedCells()).toEqual([0,1,2,3,4]);
+  })
 });

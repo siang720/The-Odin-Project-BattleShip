@@ -20,7 +20,7 @@ const Player = (name) => {
     let targetNum = notAttackedNums[Math.floor(Math.random() * notAttackedNums.length)];
     attackedNums.push(targetNum);
     const result = gameBoard.receiveAttack(targetNum);
-    return result;
+    return {result, targetNum};
   };
 
   // access

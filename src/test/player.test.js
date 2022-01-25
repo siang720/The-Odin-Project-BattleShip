@@ -23,7 +23,7 @@ describe("player", () => {
     // create a player
     const computerPlayer = Player("computer");
     // Computer can attack game board by choosing random number
-    expect(computerPlayer.randomAttack(enemyGameBoard)).toBe("miss");
+    expect(computerPlayer.randomAttack(enemyGameBoard).result).toBe("miss");
     // Computer doesn't attack the same position
     for (let i = 1; i < 100; i++) {
       computerPlayer.randomAttack(enemyGameBoard)
