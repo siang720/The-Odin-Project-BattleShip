@@ -1,5 +1,5 @@
-import GameBoard from "../gameBoard";
-import Ship from "../ship";
+import GameBoard from "../factories/gameBoard";
+import Ship from "../factories/ship";
 
 describe("gameBoard", () => {
   test("A gameboard array element should have obeject representaing its status", () => {

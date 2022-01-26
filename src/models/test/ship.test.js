@@ -1,4 +1,4 @@
-import Ship from "../ship";
+import Ship from "../factories/ship";
 
 describe("ship", () => {
   test("A ship should return exact the same length with which it was created.", () => {

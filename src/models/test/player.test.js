@@ -1,6 +1,6 @@
-import Player from '../player';
-import GameBoard from "../gameBoard";
-import Ship from "../ship";
+import Player from '../factories/player';
+import GameBoard from "../factories/gameBoard";
+import Ship from "../factories/ship";
 
 describe("player", () => {
   test("Players can take turns playing the game by attacking the enemy Gameboard.", () => {
