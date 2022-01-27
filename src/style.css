@@ -16,7 +16,7 @@
   gap: 60px;
 }
 
-.user-name {
+.user-name, .computer-name {
   margin-bottom: 16px;
 }
 
@@ -26,14 +26,22 @@
   height: 400px;
 }
 
-.grid-element {
+.cell {
   border: 1px solid black;
 }
 
-.grid-element:hover {
+.cell:hover {
   background-color: yellow;
 }
 
 .occupied {
   background-color: yellow;
+}
+
+.hit {
+  background-color: tomato;
+}
+
+.miss {
+  background-color: gainsboro;
 }

@@ -22,13 +22,12 @@ const createMain = () => {
 
 const createGameBoardCard = (name, size) => {
   const gameBoardCard = document.createElement("div");
-  gameBoardCard.classList.add("game-board-card");
+  gameBoardCard.classList.add(`${name}-gameBoard`);
   const userName = document.createElement("div");
-  userName.classList.add("user-name");
-  userName.dataset.owner = name;
+  userName.classList.add(`${name}-name`);
   const grid = document.createElement("div");
   grid.classList.add("grid");
-  grid.classList.add(name);
+  grid.classList.add(`${name}-grid`);
 
   gameBoardCard.appendChild(userName);
   gameBoardCard.appendChild(grid);
@@ -37,7 +36,7 @@ const createGameBoardCard = (name, size) => {
   grid.style.gridTemplateRows = `repeat(${size}, 1fr)`
   for (let i = 0; i < size * size; i++) {
     const gridElement = document.createElement('div');
-    gridElement.classList.add('grid-element');
+    gridElement.classList.add('cell');
     gridElement.dataset.index = i;
     gridElement.dataset.owner = name;
     grid.appendChild(gridElement);
@@ -58,6 +57,7 @@ const createFooter = () => {
 
 const initializeWebsite = () => {
   const content = document.getElementById("content");
+  content.innerHTML = ""
   content.appendChild(createHeader());
   content.appendChild(createMain());
   content.appendChild(createFooter());
