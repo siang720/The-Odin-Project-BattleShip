@@ -5,10 +5,23 @@
   height: 100vh;
 }
 
+/* header */
 .header {
   margin-bottom: 48px;
 }
 
+.restart-btn {
+  border: none;
+  border-radius: 5px;
+  padding: 8px 16px;
+  cursor: pointer;
+}
+
+.restart-btn:hover {
+  background-color: gold;
+}
+
+/* main */
 .main {
   flex: 1;
   display: flex;

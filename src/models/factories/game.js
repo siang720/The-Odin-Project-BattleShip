@@ -6,6 +6,12 @@ import DOMnodes from "../../views/DOMNodes";
 
 // Initialization
 const Game = () => {
+  // DOM nodes
+  const userName = DOMnodes.getUserNameNode();
+  const computerName = DOMnodes.getComputerNameNode();
+  const userGrid = DOMnodes.getUserGrid();
+  const computerGrid = DOMnodes.getComputerGrid();
+
   // set up a new game by creating Players and Gameboards
   let user = Player("User");
   let userGameBoard = GameBoard(10,10);
@@ -15,12 +21,6 @@ const Game = () => {
   // initial state
   let currentUser = "user";
   let endGame = false;
-
-  // DOM nodes
-  const userName = DOMnodes.getUserNameNode();
-  const computerName = DOMnodes.getComputerNameNode();
-  const userGrid = DOMnodes.getUserGrid();
-  const computerGrid = DOMnodes.getComputerGrid();
 
   // render players' names
   const renderName = () => {
@@ -60,61 +60,79 @@ const Game = () => {
   };
 
   // computer attack
-const computerAttack = () => {
-  const {result, targetNum} = computer.randomAttack(userGameBoard);
-  // hit
-  if (result === "hit") {
-    userGrid.childNodes[targetNum].innerText = "O"
-    if (userGameBoard.getAllSunk()) {
-      endGame = true
-      alert("Computer win! Game Over");
-    } else {
+  const computerAttack = () => {
+    const {result, targetNum} = computer.randomAttack(userGameBoard);
+    // hit
+    if (result === "hit") {
+      userGrid.childNodes[targetNum].innerText = "O"
+      if (userGameBoard.getAllSunk()) {
+        endGame = true
+        alert("Computer win! Game Over");
+      } else {
+        currentUser = "user";
+        alert("Your term now!");
+      }
+    };
+    if (result === "miss") {
+      userGrid.childNodes[targetNum].innerText = "X";
       currentUser = "user";
       alert("Your term now!");
-    }
-  };
-  if (result === "miss") {
-    userGrid.childNodes[targetNum].innerText = "X";
-    currentUser = "user";
-    alert("Your term now!");
-  };
-}
-
-  const startGame = () => {
-    // add event listener to computer grid
-    computerGrid.addEventListener("click", (event) => {
-      const targerCell = event.target;
-      if (endGame) {
-        alert("Game Over");
-        // ask user if restart game
-      } else if (currentUser === "computer") {
-        alert("It's computer term now!");
-      } else if (targerCell.dataset.owner === "computer" && currentUser === "user") {
-        const result = user.attack(computerGameBoard, targerCell.dataset.index);
-        // hit
-        if (result === "hit") {
-          targerCell.innerText = "O"
-          if (computerGameBoard.getAllSunk()) {
-            endGame = true
-            alert("You win! Game Over");
-          } else {
-            currentUser = "computer";
-            computerAttack();
-          }
-        };
-        // miss
-        if (result === "miss") {
-          computerGrid.childNodes[targerCell.dataset.index].innerText = "X";
-          currentUser = "computer";
-          computerAttack();
-        };
-      }
-    })
-
-    //
+    };
   }
 
-  return { renderName, placeShips, startGame }
+  // event listener
+  
+  computerGrid.addEventListener("click", (e) => {
+    const targerCell = e.target;
+    if (endGame) {
+      alert("Game Over");
+      // ask user if restart game
+    } else if (currentUser === "computer") {
+      alert("It's computer term now!");
+    } else if (targerCell.dataset.owner === "computer" && currentUser === "user") {
+      const result = user.attack(computerGameBoard, targerCell.dataset.index);
+      // hit
+      if (result === "hit") {
+        targerCell.innerText = "O"
+        if (computerGameBoard.getAllSunk()) {
+          endGame = true
+          alert("You win! Game Over");
+        } else {
+          currentUser = "computer";
+          computerAttack();
+        }
+      };
+      // miss
+      if (result === "miss") {
+        computerGrid.childNodes[targerCell.dataset.index].innerText = "X";
+        currentUser = "computer";
+        computerAttack();
+      };
+    }
+  })
+
+  // initialize game
+  const init = () => {
+    // clear all mark in the cells
+    userGrid.childNodes.forEach(node => {
+      node.innerText = "";
+      node.classList.remove("occupied");
+    })
+    computerGrid.childNodes.forEach(node => {
+      node.innerText = "";
+    })
+    // redefine players and gameboards
+    user = Player("User");
+    userGameBoard = GameBoard(10,10);
+    computer = Player("Computer");
+    computerGameBoard = GameBoard(10,10);
+
+    // initial state
+    currentUser = "user";
+    endGame = false;
+  }
+
+  return { renderName, placeShips, init}
 };
 
 // Game Loop

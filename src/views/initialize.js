@@ -6,7 +6,12 @@ const createHeader = () => {
   gameName.classList.add("game-name");
   gameName.textContent = "Let's Play Battleship";
 
+  const restartBtn = document.createElement("button");
+  restartBtn.classList.add("restart-btn");
+  restartBtn.textContent = "Restart";
+
   header.appendChild(gameName);
+  header.appendChild(restartBtn);
 
   return header;
 }
