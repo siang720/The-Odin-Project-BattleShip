@@ -3,6 +3,7 @@ import Player from "./player";
 import Ship from "./ship";
 import gameBoardView from "../../views/gameBoardView";
 import DOMnodes from "../../views/DOMNodes";
+import Drag from "./drag";
 
 // Initialization
 const Game = () => {
@@ -28,32 +29,22 @@ const Game = () => {
     gameBoardView.renderName(computerName, computer);
   }
 
+  // Drag factory
+  let drag = Drag(userGrid, userGameBoard);
+
   // place ships
   const placeShips = () => {
-    // predetermined ships
-    const userShips = [
-      {ship: Ship(5), place: [0,1,2,3,4]}, 
-      {ship: Ship(4), place: [23,24,25,26]}, 
-      {ship: Ship(3), place: [47,48,49]}, 
-      {ship: Ship(3), place: [62,63,64]}, 
-      {ship: Ship(2), place: [85,86]}
-    ];
+    // add Drag N Drop event listener
+    drag.addDragAndDropEvenListeners();
+
+    // computer ships
     const computerShips = [
-      // {ship: Ship(5), place: [0,1,2,3,4]}, 
-      // {ship: Ship(4), place: [20,21,22,23]}, 
-      // {ship: Ship(3), place: [40,41,42]}, 
-      // {ship: Ship(3), place: [60,61,62]}, 
+      {ship: Ship(5), place: [0,1,2,3,4]}, 
+      {ship: Ship(4), place: [20,21,22,23]}, 
+      {ship: Ship(3), place: [40,41,42]}, 
+      {ship: Ship(3), place: [60,61,62]}, 
       {ship: Ship(2), place: [80,81]}
     ];
-    // place ships
-    userShips.forEach(ship => {
-      // place ship to game board
-      userGameBoard.placeShip(ship.ship, ship.place);
-      // show user ship's place on game board
-      ship.place.forEach(index => {
-        userGrid.childNodes[index].classList.add("occupied");
-      })
-    })
     computerShips.forEach(ship => {
       computerGameBoard.placeShip(ship.ship, ship.place);
     })
@@ -126,6 +117,9 @@ const Game = () => {
     userGameBoard = GameBoard(10,10);
     computer = Player("Computer");
     computerGameBoard = GameBoard(10,10);
+
+    // redefine drag
+    drag = Drag(userGrid, userGameBoard);
 
     // initial state
     currentUser = "user";
