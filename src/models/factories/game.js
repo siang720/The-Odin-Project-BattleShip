@@ -70,13 +70,13 @@ const Game = () => {
         alert("Computer win! Game Over");
       } else {
         currentUser = "user";
-        alert("Your term now!");
+        setTimeout(() => alert("Your term now!"), 200);
       }
     };
     if (result === "miss") {
       userGrid.childNodes[targetNum].innerText = "X";
       currentUser = "user";
-      alert("Your term now!");
+      setTimeout(() => alert("Your term now!"), 200);
     };
   }
 
@@ -99,14 +99,14 @@ const Game = () => {
           alert("You win! Game Over");
         } else {
           currentUser = "computer";
-          computerAttack();
+          setTimeout(() => computerAttack(), 400);
         }
       };
       // miss
       if (result === "miss") {
         computerGrid.childNodes[targerCell.dataset.index].innerText = "X";
         currentUser = "computer";
-        computerAttack();
+        setTimeout(() => computerAttack(), 400);
       };
     }
   })
