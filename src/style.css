@@ -35,12 +35,15 @@
 
 .grid {
   display: grid;
-  width: 400px;
-  height: 400px;
+  width: 410px;
+  height: 410px;
+  border-left: 1px solid black;
+  border-top: 1px solid black;
 }
 
 .cell {
-  border: 1px solid black;
+  border-right: 1px solid black;
+  border-bottom: 1px solid black;
 }
 
 .cell:hover {
@@ -57,4 +60,33 @@
 
 .miss {
   background-color: gainsboro;
+}
+
+.ship-container {
+  display: flex;
+  gap: 16px;
+}
+
+.ship-name {
+  text-align: left;
+  font-weight: 600;
+  width: 80px;
+  height: 40px;
+  line-height: 40px;
+  margin: 8px;
+}
+
+.ship {
+  display: flex;
+  margin: 8px 0 8px 0;
+  border-top: 1px solid black;
+  border-left: 1px solid black;
+  border-bottom: 1px solid black;
+}
+
+.ship-cell {
+  width: 40px;
+  height: 40px;
+  background-color: yellow;
+  border-right: 1px solid black;
 }
