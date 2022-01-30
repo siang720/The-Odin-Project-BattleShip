@@ -6,12 +6,6 @@ import DOMnodes from "./views/DOMNodes";
 // website initialization
 initializeWebsite();
 
-// new game
-const startGame = () => {
-  game.renderName();
-  game.placeShips();
-}
-
 // game init
 let game = Game();
 startGame();
@@ -22,3 +16,12 @@ restartBtn.addEventListener("click", (e) => {
   game.init();
   startGame();
 })
+
+// new game
+function startGame() {
+  game.renderName();
+  game.renderGrid();
+  game.renderAvailableShips();
+  game.placeShips();
+  game.addEventListener();
+}

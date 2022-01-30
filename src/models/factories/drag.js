@@ -2,8 +2,8 @@ import DOMnodes from "../../views/DOMNodes";
 import gameBoardView from "../../views/gameBoardView";
 import Ship from "./ship";
 
-const Drag = (userGrid, userGameBoard) => {
-  let draggedShip;
+const Drag = (userGameBoard) => {
+  let draggedShip = "";
   let draggedShipIndex;
   let isHorizontal = true;
 
@@ -34,7 +34,9 @@ const Drag = (userGrid, userGameBoard) => {
     if ( isHorizontal ) {
       if ( rightLength <= rightSpaces && leftLength <= leftSpaces) {
         // gameBoardView render ship place
-        gameBoardView.renderShip(userGrid, startIndex, shipLength, isHorizontal);
+        gameBoardView.renderShip(DOMnodes.getUserGrid(), startIndex, shipLength, isHorizontal);
+        draggedShip.parentNode.remove();
+        addDragAndDropEvenListeners();
         // place ship to user gameBoard object
         let place = [];
         for (let i = 0; i < shipLength; i++) {
@@ -45,7 +47,8 @@ const Drag = (userGrid, userGameBoard) => {
     } else {
       if ( bottomLength <= bottomSpaces && topLength <= topSpaces) {
         // gameBoardView render ship place
-        gameBoardView.renderShip(userGrid, startIndex, shipLength, isHorizontal);
+        gameBoardView.renderShip(DOMnodes.getUserGrid(), startIndex, shipLength, isHorizontal);
+        draggedShip.parentNode.remove();
         // place ship to user gameBoard object
         let place = [];
         for (let i = 0; i < shipLength; i += 10) {
@@ -60,18 +63,11 @@ const Drag = (userGrid, userGameBoard) => {
   const dragOver = (e) => {
     e.preventDefault();
   };
-  // const dragEnter = (e) => {
-  //   e.preventDefault();
-  //   e.target.style.backgroundColor = "yellow";
-  // };
-  // const dragLeave = (e) => {
-  //   e.target.style.backgroundColor = "inherit";
-  // };
   const dragEnd = () => {};
 
   const addDragAndDropEvenListeners = () => {
     const ships = DOMnodes.getShips();
-    const cells = userGrid.childNodes;
+    const cells = DOMnodes.getUserGrid().childNodes;
 
     // Add EventListners for drag/drop events
     for (const ship of ships) {
@@ -85,13 +81,13 @@ const Drag = (userGrid, userGameBoard) => {
     }
     for (const cell of cells) {
       cell.addEventListener('dragover', dragOver);
-      // cell.addEventListener('dragenter', dragEnter);
-      // cell.addEventListener('dragleave', dragLeave);
       cell.addEventListener('drop', dragDrop);
     }
   };
 
-  return { addDragAndDropEvenListeners };
+  const getDraggedShip = () => draggedShip;
+
+  return { addDragAndDropEvenListeners, getDraggedShip };
 
 }
 
