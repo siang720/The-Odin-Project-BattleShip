@@ -6,6 +6,7 @@ const Drag = (userGameBoard) => {
   let draggedShip = "";
   let draggedShipIndex;
   let isHorizontal = true;
+  let draggedCells = [];
 
   const getDraggedShipIndex = (e) => {
     draggedShipIndex = Number(e.target.dataset.index)
@@ -16,48 +17,63 @@ const Drag = (userGameBoard) => {
   };
 
   const dragDrop = (e) => {
+    if (draggedCells.includes(e.target.dataset.index)) return
     // if ship size cross the border, reject this drag
     let shipLength = draggedShip.childNodes.length;
-    // for horizontal ship
-    let rightLength = shipLength - draggedShipIndex - 1;
-    let leftLength = draggedShipIndex;
-    let leftSpaces = e.target.dataset.index % 10
-    let rightSpaces = 9 - leftSpaces;
-    // for vertical ship
-    let bottomLength = shipLength - draggedShipIndex - 1;
-    let topLength = draggedShipIndex;
-    let topSpaces = Math.floor(e.target.dataset.index / 10);
-    let bottomSpaces = 9 - leftSpaces;
-    // start Index
-    let startIndex = isHorizontal ? e.target.dataset.index - leftLength : e.target.dataset.index - topLength * 10;
-    // check ship place availability
-    if ( isHorizontal ) {
-      if ( rightLength <= rightSpaces && leftLength <= leftSpaces) {
+    if (isHorizontal) {
+      let startIndex = e.target.dataset.index - draggedShipIndex;
+      let place = [];
+      let invalid = false;
+      for (let i = 0; i < shipLength; i++) {
+        let currentIndex = startIndex + i
+        if (
+          currentIndex < 0 ||
+          draggedCells.includes(currentIndex) || 
+          Math.floor(currentIndex / 10) !== Math.floor(startIndex / 10)
+        ) {
+          invalid = true;
+          break
+        }
+        place.push(currentIndex);
+      }
+      if (!invalid) {
+        // add ship place to draggedCells
+        draggedCells = draggedCells.concat(place);
         // gameBoardView render ship place
         gameBoardView.renderShip(DOMnodes.getUserGrid(), startIndex, shipLength, isHorizontal);
         draggedShip.parentNode.remove();
         addDragAndDropEvenListeners();
         // place ship to user gameBoard object
-        let place = [];
-        for (let i = 0; i < shipLength; i++) {
-          place.push(startIndex + i);
-        }
         userGameBoard.placeShip(Ship(shipLength), place);
       }
     } else {
-      if ( bottomLength <= bottomSpaces && topLength <= topSpaces) {
+      // vertical ship
+      let startIndex = e.target.dataset.index - draggedShipIndex * 10;
+      let place = [];
+      let invalid = false;
+      for (let i = 0; i < shipLength; i+=10) {
+        let currentIndex = startIndex + i
+        if (
+          currentIndex < 0 ||
+          draggedCells.includes(currentIndex) || 
+          currentIndex > 99
+        ) {
+          invalid = true;
+          break
+        }
+        place.push(currentIndex);
+      }
+      if (!invalid) {
+        // add ship place to draggedCells
+        draggedCells = draggedCells.concat(place);
         // gameBoardView render ship place
         gameBoardView.renderShip(DOMnodes.getUserGrid(), startIndex, shipLength, isHorizontal);
         draggedShip.parentNode.remove();
+        addDragAndDropEvenListeners();
         // place ship to user gameBoard object
-        let place = [];
-        for (let i = 0; i < shipLength; i += 10) {
-          place.push(startIndex + i);
-        }
         userGameBoard.placeShip(Ship(shipLength), place);
       }
     }
-
   };
 
   const dragOver = (e) => {
