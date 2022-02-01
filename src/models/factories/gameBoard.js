@@ -5,6 +5,7 @@ const GameBoard = (rows, columns) => {
     cells.push({ shipObject: undefined, shipPart: undefined })
   };
   let missedAttacksArray = [];
+  let hitAttacksArray = [];
   let ships = [];
   let occupiedCells = [];
 
@@ -23,6 +24,7 @@ const GameBoard = (rows, columns) => {
       missedAttacksArray.push(num);
       return "miss";
     };
+    hitAttacksArray.push(num);
     cells[num].shipObject.hit(cells[num].shipPart);
     return "hit";
   };
@@ -30,6 +32,7 @@ const GameBoard = (rows, columns) => {
   // access
   const getCell = (num) => cells[num];
   const getMissedAttacksArray = () => missedAttacksArray;
+  const getHitAttacksArray = () => hitAttacksArray;
   const getAllSunk = () => {
     for (let i = 0; i < ships.length; i++) {
       if (!ships[i].isSunk()) return false
@@ -38,7 +41,7 @@ const GameBoard = (rows, columns) => {
   };
   const getOccupiedCells = () => occupiedCells;
 
-  return { getCell, placeShip, receiveAttack, getMissedAttacksArray, getAllSunk, getOccupiedCells };
+  return { getCell, placeShip, receiveAttack, getMissedAttacksArray, getHitAttacksArray, getAllSunk, getOccupiedCells };
 };
 
 export default GameBoard;

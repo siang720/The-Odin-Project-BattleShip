@@ -1,3 +1,5 @@
+import AI from './AI';
+
 const Player = (name) => {
   // property
   const playerName = name;
@@ -14,10 +16,13 @@ const Player = (name) => {
       return result;
     }
   };
-
+  // random attack plus AI
   const randomAttack = (gameBoard) => {
+    // cell indice which have not been attacked
     let notAttackedNums = allNums.filter(n => !attackedNums.includes(n));
-    let targetNum = notAttackedNums[Math.floor(Math.random() * notAttackedNums.length)];
+    let hitAttacksArray = gameBoard.getHitAttacksArray();
+    // Generate target with AI
+    let targetNum = AI.Algo_2(hitAttacksArray, notAttackedNums);
     attackedNums.push(targetNum);
     const result = gameBoard.receiveAttack(targetNum);
     return {result, targetNum};
