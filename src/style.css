@@ -57,11 +57,16 @@ body {
 /* main */
 .main {
   flex: 1;
+  background-color: #efffff;
+}
+
+.gameZone {
   display: flex;
   justify-content: center;
   padding-top: 16px;
   background-color: #efffff;
   gap: 60px;
+  margin: 0 auto;
 }
 
 .user-name, .computer-name {
@@ -78,8 +83,14 @@ body {
   color: var(--red);
 }
 
+.user-gameBoard, .computer-gameBoard {
+  margin: 0 auto;
+}
+
 .grid {
   display: grid;
+  margin: 0 auto;
+  margin-bottom: 8px;
   width: 410px;
   height: 410px;
   border-left: 2px solid var(--grid-border-color);
@@ -109,7 +120,9 @@ body {
 
 .ship-container {
   display: flex;
+  align-items: center;
   gap: 16px;
+  margin-bottom: 8px;
 }
 
 .ship-name {
@@ -119,22 +132,25 @@ body {
   width: 120px;
   height: 40px;
   line-height: 40px;
-  margin: 8px;
 }
 
 .ship {
   display: flex;
-  margin: 8px 0 8px 0;
-  border-left: 2px solid var(--grid-border-color);
-  border-top: 2px solid var(--grid-border-color);
+  align-items: center;
+  background-color: transparent;
 }
 
 .ship-cell {
   width: 40px;
   height: 40px;
   background-color: var(--yellow);
+  border-top: 2px solid var(--grid-border-color);
   border-right: 2px solid var(--grid-border-color);
   border-bottom: 2px solid var(--grid-border-color);
+}
+
+.ship-cell:first-child {
+  border-left: 2px solid var(--grid-border-color);
 }
 
 .footer {
@@ -142,4 +158,106 @@ body {
   font-family: var(--game-style-font);
   font-size: 12px;
   background-color: var(--navy-blue);
+}
+
+@media screen and (min-width: 100px) {
+  .game-name {
+    font-size: 16px;
+  }
+
+  .restart-btn {
+    font-size: 12px;
+  }
+
+  .gameZone {
+    flex-direction: column;
+    justify-content: start;
+  }
+
+  .grid {
+    width: 250px;
+    height: 250px;
+  }
+
+  .ship-container {
+    margin-bottom: 4px;
+  }
+
+  .ship {
+    height: 27px;
+    margin: 0;
+  }
+
+  .ship-name {
+    width: 80px;
+    height: 27px;
+    line-height: 27px;
+    font-size: 8px;
+    margin: 0;
+  }
+
+  .ship-cell {
+    width: 23px;
+    height: 23px;
+  }
+}
+
+@media screen and (min-width: 800px) {
+  .game-name {
+    font-size: 28px;
+  }
+
+  .restart-btn {
+    font-size: 16px;
+  }
+
+  .gameZone {
+    flex-direction: row;
+    justify-content: center;
+    max-width: 900px;
+  }
+
+  .grid {
+    width: 330px;
+    height: 330px;
+  }
+
+  .ship-container {
+    margin: 16px;
+  }
+
+  .ship-name {
+    width: 120px;
+    font-size: 12px;
+  }
+
+  .ship {
+    height: 35px;
+  }
+
+  .ship-cell {
+    width: 31px;
+    height: 31px;
+  }
+}
+
+@media screen and (min-width: 920px) {
+  .main {
+    flex-direction: row;
+    justify-content: center;
+  }
+
+  .grid {
+    width: 410px;
+    height: 410px;
+  }
+
+  .ship {
+    height: 43px;
+  }
+
+  .ship-cell {
+    width: 39px;
+    height: 39px;
+  }
 }

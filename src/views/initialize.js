@@ -19,10 +19,13 @@ const createHeader = () => {
 const createMain = () => {
   const main = document.createElement("div");
   main.classList.add("main");
+  const gameZone = document.createElement("div");
+  gameZone.classList.add("gameZone");
   let userGameBoard = createGameBoardCard("user");
   let computerGameBoard = createGameBoardCard("computer");
-  main.appendChild(userGameBoard);
-  main.appendChild(computerGameBoard);
+  main.appendChild(gameZone);
+  gameZone.appendChild(userGameBoard);
+  gameZone.appendChild(computerGameBoard);
 
   return main;
 }
