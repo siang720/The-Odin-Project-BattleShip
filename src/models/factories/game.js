@@ -77,7 +77,8 @@ const Game = () => {
     const {result, targetNum} = computer.randomAttack(userGameBoard);
     // hit
     if (result === "hit") {
-      DOMnodes.getUserGrid().childNodes[targetNum].innerText = "O"
+      // DOMnodes.getUserGrid().childNodes[targetNum].innerText = "O"
+      gameBoardView.receiveAttack(DOMnodes.getUserGrid(), targetNum, result);
       if (userGameBoard.getAllSunk()) {
         endGame = true
         alert("Computer win! Game Over");
@@ -87,7 +88,8 @@ const Game = () => {
       }
     };
     if (result === "miss") {
-      DOMnodes.getUserGrid().childNodes[targetNum].innerText = "X";
+      // DOMnodes.getUserGrid().childNodes[targetNum].innerText = "X";
+      gameBoardView.receiveAttack(DOMnodes.getUserGrid(), targetNum, result);
       currentUser = "user";
       setTimeout(() => alert("Your term now!"), 200);
     };
@@ -106,7 +108,8 @@ const Game = () => {
         const result = user.attack(computerGameBoard, targerCell.dataset.index);
         // hit
         if (result === "hit") {
-          targerCell.innerText = "O"
+          // targerCell.innerText = "O"
+          gameBoardView.receiveAttack(DOMnodes.getComputerGrid(), targerCell.dataset.index, result);
           if (computerGameBoard.getAllSunk()) {
             endGame = true
             alert("You win! Game Over");
@@ -117,7 +120,8 @@ const Game = () => {
         };
         // miss
         if (result === "miss") {
-          DOMnodes.getComputerGrid().childNodes[targerCell.dataset.index].innerText = "X";
+          // DOMnodes.getComputerGrid().childNodes[targerCell.dataset.index].innerText = "X";
+          gameBoardView.receiveAttack(DOMnodes.getComputerGrid(), targerCell.dataset.index, result);
           currentUser = "computer";
           setTimeout(() => computerAttack(), 400);
         };

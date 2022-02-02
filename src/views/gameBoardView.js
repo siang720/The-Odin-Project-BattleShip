@@ -25,6 +25,11 @@ const gameBoardView = (() => {
     }
   }
 
+  const receiveAttack = (grid, index, result) => {
+    let nodeAttacked = grid.childNodes[index];
+    result === "hit" ? nodeAttacked.classList.add('hit') : nodeAttacked.classList.add('miss');
+  }
+
   const addShip = (gameBoard, name, length) => {
     let shipContainer = document.createElement("div");
     shipContainer.classList.add("ship-container");
@@ -55,7 +60,7 @@ const gameBoardView = (() => {
     }
   };
 
-  return { renderName, renderShip, addShip, clearAvailableShips, renderGrid, removeGrid }
+  return { renderName, renderShip, addShip, clearAvailableShips, renderGrid, removeGrid, receiveAttack }
 })();
 
 export default gameBoardView;
