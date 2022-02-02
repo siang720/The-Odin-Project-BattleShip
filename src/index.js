@@ -2,6 +2,7 @@ import './style.css';
 import initializeWebsite from './views/initialize';
 import Game from '../src/models/factories/game';
 import DOMnodes from "./views/DOMNodes";
+import gameBoardView from './views/gameBoardView';
 
 // website initialization
 initializeWebsite();
@@ -23,5 +24,6 @@ function startGame() {
   game.renderGrid();
   game.renderAvailableShips();
   game.placeShips();
+  game.renderNotice();
   game.addEventListener();
 }

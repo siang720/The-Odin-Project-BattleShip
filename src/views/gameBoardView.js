@@ -3,6 +3,10 @@ const gameBoardView = (() => {
     nameNode.innerText = player.getName();
   }
 
+  const renderNotice = (text, node) => {
+    node.innerText = text;
+  }
+
   const renderGrid = (gameBoardSection, name, size) => {
     const grid = document.createElement("div");
     grid.classList.add("grid", `${name}-grid`);    
@@ -60,7 +64,7 @@ const gameBoardView = (() => {
     }
   };
 
-  return { renderName, renderShip, addShip, clearAvailableShips, renderGrid, removeGrid, receiveAttack }
+  return { renderName, renderShip, addShip, clearAvailableShips, renderGrid, removeGrid, receiveAttack, renderNotice }
 })();
 
 export default gameBoardView;

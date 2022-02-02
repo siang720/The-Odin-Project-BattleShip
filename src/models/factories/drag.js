@@ -7,6 +7,7 @@ const Drag = (userGameBoard) => {
   let draggedShipIndex;
   let isHorizontal = true;
   let draggedCells = [];
+  let draggedCounts = 0
 
   const getDraggedShipIndex = (e) => {
     draggedShipIndex = Number(e.target.dataset.index)
@@ -42,6 +43,8 @@ const Drag = (userGameBoard) => {
         // gameBoardView render ship place
         gameBoardView.renderShip(DOMnodes.getUserGrid(), startIndex, shipLength, isHorizontal);
         draggedShip.parentNode.remove();
+        draggedCounts += 1;
+        if (draggedCounts === 5) { gameBoardView.renderNotice("Start to attack computer ship!", DOMnodes.getNotice()); }
         addDragAndDropEvenListeners();
         // place ship to user gameBoard object
         userGameBoard.placeShip(Ship(shipLength), place);
@@ -69,6 +72,8 @@ const Drag = (userGameBoard) => {
         // gameBoardView render ship place
         gameBoardView.renderShip(DOMnodes.getUserGrid(), startIndex, shipLength, isHorizontal);
         draggedShip.parentNode.remove();
+        draggedCounts += 1;
+        if (draggedCounts === 5) { gameBoardView.renderNotice("Start to attack computer ship!", DOMnodes.getNotice()); }
         addDragAndDropEvenListeners();
         // place ship to user gameBoard object
         userGameBoard.placeShip(Ship(shipLength), place);

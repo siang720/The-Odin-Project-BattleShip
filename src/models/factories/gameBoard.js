@@ -18,6 +18,11 @@ const GameBoard = (rows, columns) => {
       cells[place[i]].shipPart = i;
     }
   };
+
+  const getShips = () => {
+    return ships;
+  };
+
   const receiveAttack = (num) => {
     if (cells[num].shipObject === undefined) {
       cells[num]["miss"] = true;
@@ -41,7 +46,7 @@ const GameBoard = (rows, columns) => {
   };
   const getOccupiedCells = () => occupiedCells;
 
-  return { getCell, placeShip, receiveAttack, getMissedAttacksArray, getHitAttacksArray, getAllSunk, getOccupiedCells };
+  return { getCell, placeShip, receiveAttack, getMissedAttacksArray, getHitAttacksArray, getAllSunk, getOccupiedCells, getShips };
 };
 
 export default GameBoard;

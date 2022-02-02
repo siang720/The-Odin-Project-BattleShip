@@ -1,5 +1,6 @@
 const DOMnodes = (() => {
   const getContent = () => document.getElementById("content");
+  const getNotice = () => document.querySelector(".game-notice");
   const getUserNameNode = () => document.querySelector(".user-name");
   const getComputerNameNode = () => document.querySelector(".computer-name");
   const getUserGameBoard = () => document.querySelector(".user-gameBoard");
@@ -11,6 +12,7 @@ const DOMnodes = (() => {
 
   return { 
     getContent,
+    getNotice,
     getUserNameNode, 
     getComputerNameNode, 
     getUserGrid, 
